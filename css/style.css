@@ -1,0 +1,23 @@
+.sapMListTblCell.cellBorderRight {
+	border-top: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+}
+.sapMListTblNavCol{
+	border-top: 1px solid lightgray !important; 
+	border-right: 1px solid lightgray !important;
+}
+.sapMListTblCell.cellBorderLeft {
+	border-left: 1px solid lightgray;
+}
+
+.sapUiCompFilterBarBasicArea .sapUiCompFilterLabel.sapMLabel:after{
+	content:'' !important;
+}
+
+/*label#__bar0-filterItem-___INTERNAL_-G{*/
+/*    visibility: hidden;*/
+/*}*/
+
+/*label#__bar1-filterItem-___INTERNAL_-G{*/
+/*    visibility: hidden;*/
+/*}*/

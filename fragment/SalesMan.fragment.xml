@@ -1,0 +1,5 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog title="Sales Man List" class="sapUiPopupWithPadding" confirm="_handleValueHelpSalesmanClose" cancel="_handleValueHelpClose">
+		<!--<StandardListItem iconDensityAware="false" iconInset="false" title="{PARTNER}" description="{NAME_LAST}"/>-->
+	</SelectDialog>
+</core:FragmentDefinition>

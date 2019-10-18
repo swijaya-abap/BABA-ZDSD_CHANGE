@@ -1,0 +1,115 @@
+<mvc:View controllerName="do.late.change.ZF_DO_LATE_CHG.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:FullscreenPage id="page" title="{i18n>objectTitle}" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}">
+		<semantic:content>
+			<Panel expandable="false" expanded="true" width="auto" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar height="2rem">
+						<Title text="{i18n>header}"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<f:SimpleForm id="formHeader" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+						singleContainerFullSize="false">
+						<f:content>
+							<Label text="{i18n>tourID}"/>
+							<Text id="tourid" text="{TOUR_ID}"/>
+							<Label text="{i18n>branch}"/>
+							<Text id="branch" text="{BRANCH_CD}"/>
+							<Label text="{i18n>route}"/>
+							<Text id="routeuser" text="{ROUTE_USER}"/>
+							<Label text="{i18n>actualsalesman}"/>
+							<Text text="{OR_SALES_MAN}"/>
+							<Label text="{i18n>salemanname}"/>
+							<Text text="{OR_SALES_NM}"/>
+							<Label text="{i18n>actualvehicle}"/>
+							<Text text="{OR_VEHICLE}"/>
+							<core:Title text=""/>
+							<Label text="{i18n>visitlisID}"/>
+							<Text id="visitid" text="{VISIT_ID}"/>
+							<Label text="{i18n>visitDate}"/>
+							<Text text="{path: 'VISIT_DATE', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', source: { pattern: 'yyyyMMdd' } }}"/>
+							<Label text="{i18n>actualdriver}"/>
+							<Text text="{OR_DRIVER}"/>
+							<Label text="{i18n>drivername}"/>
+							<Text text="{OR_DRIVER_NM}"/>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Panel>
+			<Panel expandable="false" expanded="true" width="auto" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar height="2rem">
+						<Title text="{i18n>detailchange}"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<f:SimpleForm id="formDetail" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="1"
+						singleContainerFullSize="false">
+						<f:content>
+							<Label text="{i18n>newsalesman}"/>
+							<Input id="saleMan" value="{SALES_MAN}" required="false" showValueHelp="true" suggest="onSuggestStart" suggestionItems="{/SALESREPSet}"
+								showSuggestion="true" editable="{= ${EDITABLE} === 'X' ? true : false }" suggestionItemSelected="onSaleManSelected"
+								valueHelpRequest="onHandleSaleManHelp">
+								<suggestionItems>
+									<core:Item text="{PARTNER}-{NAME_LAST}"/>
+								</suggestionItems>
+							</Input>
+							<Label text="{i18n>salemanname}"/>
+							<Input id="salemanname" value="{SALES_NM}" editable="false"/>
+							<Label text="{i18n>commissiontype}"/>
+							<ComboBox id="commissionType" showSecondaryValues="true" items="{/COMMISSIONTYPESet}" editable="{= ${EDITABLE} === 'X' ? true : false }"
+								selectedKey="{COMMTYPE1}">
+								<core:ListItem key="{KATR5}" text="{VTEXT}"/>
+							</ComboBox>
+							<Label text="{i18n>validuntil}"/>
+							<DatePicker id="validuntil" placeholder="Input date ..." displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd"
+								editable="{= ${EDITABLE} === 'X' ? true : false }" dateValue="{SLSREP_ENDDT}" change="onSalemanChange"/>
+							<Label text="{i18n>newvihicle}"/>
+							<!--<Input value="" editable="{= ${EDITABLE} === 'X' ? true : false }"/>-->
+							<Input id="newvihicle" required="false" showValueHelp="true" suggestionItems="{/VEHICLESet}" showSuggestion="true" value="{VEHICLE}"
+								suggest="onVhSuggestStart" editable="{= ${EDITABLE} === 'X' ? true : false }" suggestionItemSelected="onVehicleSelected"
+								valueHelpRequest="onHandleVehicleHelp">
+								<suggestionItems>
+									<core:Item text="{EQUNR}-{EQKTX}"/>
+								</suggestionItems>
+							</Input>
+							<Label text="{i18n>vehiclevaliduntil}"/>
+							<DatePicker id="vehiclevaliduntil" placeholder="Input date ..." displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd"
+								editable="{= ${EDITABLE} === 'X' ? true : false }" dateValue="{VEHICLE_ENDDT}" change="onVehicleChange"/>
+							<core:Title text=""/>
+							<Label text="{i18n>newdriver}"/>
+							<Input id="newdriver" value="{DRIVER}" editable="{= ${EDITABLE} === 'X' ? true : false }" showValueHelp="true" suggest="onDrSuggestStart"
+								suggestionItems="{/DRIVERSet}" showSuggestion="true" suggestionItemSelected="onDriverSelected" valueHelpRequest="onHandleDriverHelp">
+								<suggestionItems>
+									<core:Item text="{PARTNER}-{NAME_LAST}"/>
+								</suggestionItems>
+							</Input>
+							<Label text="{i18n>driverName}"/>
+							<Input id="driverName" value="{DRIVER_NM}" editable="false"/>
+							<Label text="{i18n>commissiontypedriver}"/>
+							<ComboBox id="commissiontypedriver" showSecondaryValues="true" items="{/COMMISSIONTYPESet}" selectedKey="{COMMTYPE2}"
+								editable="{= ${EDITABLE} === 'X' ? true : false }">
+								<core:ListItem key="{KATR5}" text="{VTEXT}"/>
+							</ComboBox>
+							<Label text="{i18n>validuntildriver}"/>
+							<DatePicker id="validuntildriver" placeholder="Input date ..." displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd" dateValue="{DRIVER_ENDDT}"
+								editable="{= ${EDITABLE} === 'X' ? true : false }" change="onDriverChange"/>
+							<Label text="{i18n>visitcat}"/>
+							<ComboBox id="visitcat" showSecondaryValues="true" items="{/VISITCATSet}" selectedKey="{VISIT_CAT}"
+								editable="false">
+								<core:ListItem key="{VISIT_CAT}" text="{DESCRIPTION}"/>
+							</ComboBox>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Panel>
+		</semantic:content>
+		<semantic:customFooterContent>
+			<Button text="{i18n>Save}" type="Accept" press="onSavePress" enabled="{= ${EDITABLE} === 'X' ? true : false }"/>
+		</semantic:customFooterContent>
+	</semantic:FullscreenPage>
+</mvc:View>

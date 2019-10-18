@@ -1,0 +1,104 @@
+<mvc:View controllerName="do.late.change.ZF_DO_LATE_CHG.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<semantic:FullscreenPage id="page" title="{i18n>worklistViewTitle}">
+		<semantic:content>
+			<fb:FilterBar searchEnabled="false" showGoButton="false" showFilterConfiguration="false" id="searchFitlerBar">
+				<fb:filterItems>
+					<fb:FilterItem name="B" label="{i18n>branch}" mandatory="false">
+						<fb:control>
+							<ComboBox id="branchCD" showSecondaryValues="true" items="{/BRANCHSet}" required="true" selectionChange="onBranchSelectionChange">
+								<core:ListItem key="{AUTH}" text="{AUTHT}" additionalText="{AUTH}"/>
+							</ComboBox>
+						</fb:control>
+					</fb:FilterItem>
+					<fb:FilterItem name="A" label="{i18n>sales}" mandatory="false">
+						<fb:control>
+							<!--<Input id="sale" required="false" showValueHelp="true" suggestionItems="{/SALESREPSet}" showSuggestion="true"-->
+							<!--	suggestionItemSelected="onLicenseNumSelected" valueHelpRequest="onHandleHelpLicensePlate">-->
+							<!--	<suggestionItems>-->
+							<!--		<core:Item text="{PARTNER}-{NAME_LAST}"/>-->
+							<!--	</suggestionItems>-->
+							<ComboBox id="sale" showSecondaryValues="true" items="{/SALESREPSet}">
+								<core:ListItem key="{PARTNER}" text="{NAME_LAST}"/>
+							</ComboBox>
+							<!--</Input>-->
+						</fb:control>
+					</fb:FilterItem>
+					<fb:FilterItem name="C" label="{i18n>route}" mandatory="false">
+						<fb:control>
+							<ComboBox id="routeUser" showSecondaryValues="true" items="{/ROUTESet}">
+								<core:ListItem key="{ROUTEIN}" text="{BEZEI}" additionalText="{ROUTEIN}"/>
+							</ComboBox>
+						</fb:control>
+					</fb:FilterItem>
+					<fb:FilterItem name="E" label="{i18n>excutiondate}" mandatory="true">
+						<fb:control>
+							<!--<DatePicker id="excuteDate" placeholder="Input excution date ..." displayFormat="dd.MM.yyyy" valueFormat="yyyy.MM.dd"/>-->
+							<DateRangeSelection id="excuteDate" placeholder="Input excution date ..." displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd"/>
+						</fb:control>
+					</fb:FilterItem>
+					<fb:FilterItem name="G" label="{i18n>visitcat}" mandatory="true">
+						<fb:control>
+							<ComboBox id="visitcat" showSecondaryValues="true" items="{/VISITCATSet}">
+								<core:ListItem key="{VISIT_CAT}" text="{DESCRIPTION}"/>
+							</ComboBox>
+						</fb:control>
+					</fb:FilterItem>
+					<fb:FilterItem name="F" label="">
+						<fb:control>
+							<Button text="{i18n>search}" press="onSearch"/>
+						</fb:control>
+					</fb:FilterItem>
+				</fb:filterItems>
+			</fb:FilterBar>
+			<Table id="table" width="auto" class="sapUiResponsiveMargin" growing="true" growingScrollToLoad="true" items="{worklistView>/visitList}">
+				<columns>
+					<Column styleClass="cellBorderLeft cellBorderRight" width="8%">
+						<Text text="{i18n>tourID}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" styleClass="cellBorderLeft cellBorderRight" width="8%">
+						<Text text="{i18n>visitlist}" textAlign="Center" wrapping="false"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" styleClass="cellBorderLeft cellBorderRight" width="8%">
+						<Text text="{i18n>visitDate}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" width="auto" styleClass="cellBorderLeft cellBorderRight">
+						<Text text="{i18n>route}" wrapping="false"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" width="auto" styleClass="cellBorderLeft cellBorderRight">
+						<Text text="{i18n>routeuser}" wrapping="false"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" width="auto" styleClass="cellBorderLeft cellBorderRight">
+						<Text text="{i18n>SalesMan}" wrapping="false"/>
+					</Column>
+					<!--<Column minScreenWidth="Tablet" demandPopin="true" width="auto" styleClass="cellBorderLeft cellBorderRight">-->
+					<!--	<Text text="{i18n>actualsalesman}" wrapping="false"/>-->
+					<!--</Column>-->
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation" press="onToDetail">
+						<cells>
+							<ObjectIdentifier title="{worklistView>TOUR_ID}"/>
+						</cells>
+						<cells>
+							<Text text="{worklistView>VISIT_ID}"/>
+						</cells>
+						<cells>
+							<Text
+								text="{path: 'worklistView>VISIT_DATE', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', source: { pattern: 'yyyyMMdd' } }}"/>
+						</cells>
+						<cells>
+							<Text text="{worklistView>ROUTE}"/>
+						</cells>
+						<cells>
+							<Text text="{worklistView>ROUTE_USER}"/>
+						</cells>
+						<cells>
+							<Text text="{worklistView>SALES_MAN}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

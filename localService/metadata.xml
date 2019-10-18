@@ -1,0 +1,89 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZDSDO_LATE_CHANGE_TOUR_SRV" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="BRANCH" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="AUTH"/>
+                </Key>
+                <Property Name="AUTH" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Visit Group" sap:sortable="false"/>
+                <Property Name="AUTHT" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Visit Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="SALESREP" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PARTNER"/>
+                </Key>
+                <Property Name="PARTNER" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="BusinessPartner" sap:sortable="false"/>
+                <Property Name="NAME_LAST" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Last Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="COMMISSIONTYPE" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="KATR5"/>
+                </Key>
+                <Property Name="KATR5" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Commission Type" sap:sortable="false"/>
+                <Property Name="VTEXT" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="VEHICLE" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="EQUNR"/>
+                </Key>
+                <Property Name="EQUNR" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Equipment" sap:sortable="false"/>
+                <Property Name="EQKTX" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="VISITLIST" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="VISIT_DATE"/>
+                    <PropertyRef Name="ROUTE_USER"/>
+                    <PropertyRef Name="BRANCH_CD"/>
+                    <PropertyRef Name="SALES_MAN"/>
+                </Key>
+                <Property Name="TOUR_ID" Type="Edm.String" Nullable="false" MaxLength="11" sap:unicode="false" sap:label="Tour ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VISIT_ID" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Visit Lists" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VISIT_DATE" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Execution Date" sap:sortable="false"/>
+                <Property Name="ROUTE" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sales Rep." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ROUTE_USER" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Route" sap:sortable="false"/>
+                <Property Name="BRANCH_CD" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Visit Group" sap:sortable="false"/>
+                <Property Name="OR_SALES_MAN" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sales Rep." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OR_SALES_NM" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Last Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SALES_MAN" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sales Rep." sap:sortable="false"/>
+                <Property Name="SLSREP_ENDDT" Type="Edm.DateTime" Nullable="false" Precision="8" sap:unicode="false" sap:label="End Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="COMMTYPE1" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Comm.Typ.Sls.Repr." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OR_DRIVER" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sales Asst." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OR_DRIVER_NM" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Last Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DRIVER" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Sales Asst." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DRIVER_ENDDT" Type="Edm.DateTime" Nullable="false" Precision="8" sap:unicode="false" sap:label="End Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="COMMTYPE2" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Comm.Typ.Sls.Asst." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OR_VEHICLE" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Vehicle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VEHICLE" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Vehicle" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VEHICLE_ENDDT" Type="Edm.DateTime" Nullable="false" Precision="8" sap:unicode="false" sap:label="End Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VPTYP" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Visit Plan Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DATA_STAT" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="TD Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EDITABLE" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single-Character Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MESSAGE" Type="Edm.String" Nullable="false" MaxLength="220" sap:unicode="false" sap:label="Message text" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ERROR" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Single-Character Flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ROUTE" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ROUTEIN"/>
+                </Key>
+                <Property Name="ROUTEIN" Type="Edm.String" Nullable="false" MaxLength="6" sap:unicode="false" sap:label="Route" sap:sortable="false"/>
+                <Property Name="BEZEI" Type="Edm.String" Nullable="false" MaxLength="40" sap:unicode="false" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZDSDO_LATE_CHANGE_TOUR_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="BRANCHSet" EntityType="ZDSDO_LATE_CHANGE_TOUR_SRV.BRANCH" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="SALESREPSet" EntityType="ZDSDO_LATE_CHANGE_TOUR_SRV.SALESREP" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="COMMISSIONTYPESet" EntityType="ZDSDO_LATE_CHANGE_TOUR_SRV.COMMISSIONTYPE" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="VEHICLESet" EntityType="ZDSDO_LATE_CHANGE_TOUR_SRV.VEHICLE" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="VISITLISTSet" EntityType="ZDSDO_LATE_CHANGE_TOUR_SRV.VISITLIST" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ROUTESet" EntityType="ZDSDO_LATE_CHANGE_TOUR_SRV.ROUTE" sap:searchable="true" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZDSDO_LATE_CHANGE_TOUR_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZDSDO_LATE_CHANGE_TOUR_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

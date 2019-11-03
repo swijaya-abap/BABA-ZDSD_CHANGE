@@ -249,6 +249,9 @@ sap.ui.define([
 				'COMMTYPE2': this.getView().byId("commissiontypedriver").getSelectedKey(),
 				'VEHICLE': this.getView().byId("newvihicle").getValue(),
 				'VEHICLE_ENDDT': this.getView().byId("vehiclevaliduntil").getValue(),
+				'ACT_SLSMAN': this.byId("or_sales_man").getText(),
+				'ACT_ASSTNC': this.byId("or_driver").getText(),
+				'ACT_TRUCK': this.byId("or_vehicle").getText(),
 				'VPTYP': this.getView().getBindingContext().getObject().VPTYP,
 				'DATA_STAT': this.getView().getBindingContext().getObject().DATA_STAT,
 				'MESSAGE': this.getView().getBindingContext().getObject().MESSAGE
@@ -285,6 +288,23 @@ sap.ui.define([
 				}.bind(this)
 			});
 
+		},
+
+		onDetailPress: function () {
+			if (!this._detailDialog) {
+				this._detailDialog = sap.ui.xmlfragment(
+					"do.late.change.ZF_DO_LATE_CHG.fragment.AdditionalDetails",
+					this
+				);
+				// var oList = this._detailDialog.getAggregation("_dialog").getAggregation("content")[1];
+				// oList.bindAggregation("items", {
+				// 	path: '/SALESREPSet',
+				// 	template: oItemTemplate,
+				// 	filters: aFilters
+				// });
+				this.getView().addDependent(this._detailDialog);
+			}
+			this._detailDialog.open();
 		},
 
 		/* =========================================================== */

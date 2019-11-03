@@ -10,13 +10,12 @@ sap.ui.define([
 		return UIComponent.extend("do.late.change.ZF_DO_LATE_CHG.Component", {
 
 			metadata : {
-				manifest: "json",
-				config: { fullWidth: true}
+				manifest: "json"
 			},
 
 			/**
 			 * The component is initialized by UI5 automatically during the startup of the app and calls the init method once.
-			 * In this function, the FLP and device models are set and the router is initialized.
+			 * In this function, the device models are set and the router is initialized.
 			 * @public
 			 * @override
 			 */
@@ -29,8 +28,6 @@ sap.ui.define([
 
 				// set the device model
 				this.setModel(models.createDeviceModel(), "device");
-				// set the FLP model
-				this.setModel(models.createFLPModel(), "FLP");
 
 				// create the views based on the url/hash
 				this.getRouter().initialize();

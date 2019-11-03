@@ -21,18 +21,18 @@
 							<Label text="{i18n>route}"/>
 							<Text id="routeuser" text="{ROUTE_USER}"/>
 							<Label text="{i18n>actualsalesman}"/>
-							<Text text="{OR_SALES_MAN}"/>
+							<Text id="or_sales_man" text="{OR_SALES_MAN}"/>
 							<Label text="{i18n>salemanname}"/>
 							<Text text="{OR_SALES_NM}"/>
 							<Label text="{i18n>actualvehicle}"/>
-							<Text text="{OR_VEHICLE}"/>
+							<Text id="or_vehicle" text="{OR_VEHICLE}"/>
 							<core:Title text=""/>
 							<Label text="{i18n>visitlisID}"/>
 							<Text id="visitid" text="{VISIT_ID}"/>
 							<Label text="{i18n>visitDate}"/>
 							<Text text="{path: 'VISIT_DATE', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', source: { pattern: 'yyyyMMdd' } }}"/>
 							<Label text="{i18n>actualdriver}"/>
-							<Text text="{OR_DRIVER}"/>
+							<Text  id="or_driver" text="{OR_DRIVER}"/>
 							<Label text="{i18n>drivername}"/>
 							<Text text="{OR_DRIVER_NM}"/>
 						</f:content>
@@ -110,6 +110,7 @@
 		</semantic:content>
 		<semantic:customFooterContent>
 			<Button text="{i18n>Save}" type="Accept" press="onSavePress" enabled="{= ${EDITABLE} === 'X' ? true : false }"/>
+			<Button text="{i18n>Detail}" type="Default" press="onDetailPress" enabled="true"/>
 		</semantic:customFooterContent>
 	</semantic:FullscreenPage>
 </mvc:View>

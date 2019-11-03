@@ -235,6 +235,8 @@ sap.ui.define([
 			// 	this.getView().byId("visitcat").setValueState("None");
 			// }
 
+			var globalData = this.getOwnerComponent().getModel("Detail");
+
 			var oItem = [{
 				'TOUR_ID': this.getView().byId("tourid").getText(),
 				'VISIT_CAT': this.getView().byId("visitcat").getSelectedKey(),
@@ -252,6 +254,7 @@ sap.ui.define([
 				'ACT_SLSMAN': this.byId("or_sales_man").getText(),
 				'ACT_ASSTNC': this.byId("or_driver").getText(),
 				'ACT_TRUCK': this.byId("or_vehicle").getText(),
+				'VISIT_DATE': globalData.VISIT_DATE,
 				'VPTYP': this.getView().getBindingContext().getObject().VPTYP,
 				'DATA_STAT': this.getView().getBindingContext().getObject().DATA_STAT,
 				'MESSAGE': this.getView().getBindingContext().getObject().MESSAGE
@@ -264,24 +267,35 @@ sap.ui.define([
 				'HEADITEMNAV': oItem
 			};
 
-			var sPath = '/HEADERSet';
 			var that = this;
+
+			var sPath = "/CHECKSet(ROUTE_USER='" + oItem[0].ROUTE_USER +
+				"',BRANCH_CD='" + oItem[0].BRANCH_CD +
+				"',VISIT_DATE='" + oItem[0].VISIT_DATE +
+				"',SLSREP_ENDDT='" + oItem[0].SLSREP_ENDDT +
+				"',DRIVER_ENDDT='" + oItem[0].DRIVER_ENDDT +
+				"',VEHICLE_ENDDT='" + oItem[0].VEHICLE_ENDDT + "')";
+
 			this.showBusy();
-			this.getModel().create(sPath, oHeader, {
+			this.getModel().read(sPath, {
 				success: function (oReturn) {
-					// MessageBox.information("Data update successully");
-					MessageBox.show(
-						"Data update successully", {
-							icon: MessageBox.Icon.INFORMATION,
-							title: "",
-							actions: [MessageBox.Action.OK],
-							onClose: function (oAction) {
-								that._navBack();
-							}
-						}
-					);
-					this.getOwnerComponent()._actionSuccess = true;
 					this.hideBusy();
+					if (oReturn.MESSAGE !== "") {
+						MessageBox.show(
+							"More than 1 visit lists will be updated. Do you want to continue?", {
+								icon: MessageBox.Icon.WARNING,
+								title: "Confirmation",
+								actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+								onClose: function (oAction) {
+									if (oAction === "YES") {
+										that._saveData(oHeader);
+									}
+								}.bind(this)
+							}
+						);
+					} else {
+						this._saveData(oHeader);
+					}
 				}.bind(this),
 				error: function (oError) {
 					this.hideBusy();
@@ -290,21 +304,159 @@ sap.ui.define([
 
 		},
 
-		onDetailPress: function () {
-			if (!this._detailDialog) {
-				this._detailDialog = sap.ui.xmlfragment(
-					"do.late.change.ZF_DO_LATE_CHG.fragment.AdditionalDetails",
-					this
-				);
-				// var oList = this._detailDialog.getAggregation("_dialog").getAggregation("content")[1];
-				// oList.bindAggregation("items", {
-				// 	path: '/SALESREPSet',
-				// 	template: oItemTemplate,
-				// 	filters: aFilters
-				// });
-				this.getView().addDependent(this._detailDialog);
-			}
-			this._detailDialog.open();
+		onDetailPress: function (oEvent) {
+
+			var sPath = "/DETAILSet(VISIT_ID='" + this.getView().byId("visitid").getText() +
+				"',ROUTE_USER='" + this.getView().byId("routeuser").getText() +
+				"',SALES_MAN='" + this.getView().byId("saleMan").getValue() +
+				"',SLSREP_ENDDT='" + this.getView().byId("validuntil").getValue() +
+				"',DRIVER='" + this.getView().byId("validuntil").getValue() +
+				"',DRIVER_ENDDT='" + this.getView().byId("validuntildriver").getValue() +
+				"',VEHICLE='" + this.getView().byId("newvihicle").getValue() +
+				"',VEHICLE_ENDDT='" + this.getView().byId("vehiclevaliduntil").getValue() + "')";
+
+			// var data = {
+			// 	pages: [{
+			// 		pageId: "additionalDetailsId",
+			// 		header: "Additional Details",
+			// 		title: "",
+			// 		titleUrl: "",
+			// 		icon: "",
+			// 		description: "",
+			// 		groups: [{
+			// 			heading: "CURRENT SALESMAN",
+			// 			elements: [{
+			// 				label: "Salesman ID",
+			// 				value: "TEST 123",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}, {
+			// 				label: "Salesman Name",
+			// 				value: "TEST 123",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}, {
+			// 				label: "Valid Unit",
+			// 				value: "01/12/2019",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}]
+			// 		}, {
+			// 			heading: "CURRENT DRIVER",
+			// 			elements: [{
+			// 				label: "Driver ID",
+			// 				value: "TEST 123",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}, {
+			// 				label: "Driver Name",
+			// 				value: "TEST 123",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}, {
+			// 				label: "Valid Unit",
+			// 				value: "01/12/2019",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}]
+			// 		}, {
+			// 			heading: "CURRENT VEHICLE",
+			// 			elements: [{
+			// 				label: "Vehicle ID",
+			// 				value: "TEST 123",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}, {
+			// 				label: "Valid Unit",
+			// 				value: "01/12/2019",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}]
+			// 		}, {
+			// 			heading: "Additional Details",
+			// 			elements: [{
+			// 				label: "Source",
+			// 				value: "Visit List (or ZDSDT_NEW_SLSREP)",
+			// 				elementType: sap.m.QuickViewGroupElementType.text
+			// 			}]
+			// 		}]
+			// 	}]
+			// };
+			// oModel.setData(data);
+			
+			var oButton = oEvent.getSource();
+
+			this.showBusy();
+			// this._openQuickView(oEvent, oModel);
+			// this.hideBusy();
+
+			this.getModel().read(sPath, {
+				success: function (oReturn) {
+
+					var data = {
+						pages: [{
+							pageId: "additionalDetailsId",
+							header: "Additional Details",
+							title: "",
+							titleUrl: "",
+							icon: "",
+							description: "",
+							groups: [{
+								heading: "CURRENT SALESMAN",
+								elements: [{
+									label: "Salesman ID",
+									value: oReturn.SALES_MAN,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}, {
+									label: "Salesman Name",
+									value: oReturn.SALES_NM,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}, {
+									label: "Valid Unit",
+									value: oReturn.SLSREP_ENDDT,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}]
+							}, {
+								heading: "CURRENT DRIVER",
+								elements: [{
+									label: "Driver ID",
+									value: oReturn.DRIVER,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}, {
+									label: "Driver Name",
+									value: oReturn.DRIVER_NM,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}, {
+									label: "Valid Unit",
+									value: oReturn.DRIVER_ENDDT,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}]
+							}, {
+								heading: "CURRENT VEHICLE",
+								elements: [{
+									label: "Vehicle ID",
+									value:  oReturn.VEHICLE,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}, {
+									label: "Valid Unit",
+									value:  oReturn.VEHICLE_ENDDT,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}]
+							}, {
+								heading: "Additional Details",
+								elements: [{
+									label: "Source",
+									value: oReturn.SOURCE,
+									elementType: sap.m.QuickViewGroupElementType.text
+								}]
+							}]
+						}]
+					};
+
+					var oModel = new JSONModel();
+					oModel.setData(data);
+
+					this._openQuickView(oButton, oModel);
+
+					this.hideBusy();
+				}.bind(this),
+				error: function (oError) {
+					this.hideBusy();
+				}.bind(this)
+			});
+
 		},
 
 		/* =========================================================== */
@@ -334,6 +486,19 @@ sap.ui.define([
 				});
 				this._bindView("/" + sObjectPath);
 			}.bind(this));
+			if (sVisitCat === "Y1") {
+				var vehicleEditable = false;
+			} else {
+				vehicleEditable = true;
+			}
+			this.byId("newvihicle").setEditable(vehicleEditable);
+			this.byId("vehiclevaliduntil").setEditable(vehicleEditable);
+
+			// var oModel = new JSONModel();
+			// oModel.setData({
+			// 	vehicleEditable: vehicleEditable
+			// });
+			// this.getView().setModel(oModel, "modelData");
 		},
 
 		/**
@@ -363,6 +528,54 @@ sap.ui.define([
 						oViewModel.setProperty("/busy", false);
 					}
 				}
+			});
+		},
+
+		_saveData: function (oHeader) {
+			var sPath = '/HEADERSet';
+			var that = this;
+			this.showBusy();
+			this.getModel().create(sPath, oHeader, {
+				success: function (oReturn) {
+					// MessageBox.information("Data update successully");
+					MessageBox.show(
+						"Data update successully", {
+							icon: MessageBox.Icon.INFORMATION,
+							title: "",
+							actions: [MessageBox.Action.OK],
+							onClose: function (oAction) {
+								that._navBack();
+							}
+						}
+					);
+					this.getOwnerComponent()._actionSuccess = true;
+					this.hideBusy();
+				}.bind(this),
+				error: function (oError) {
+					this.hideBusy();
+				}.bind(this)
+			});
+		},
+
+		_createPopover: function () {
+			if (!this._oQuickView) {
+				this._oQuickView = sap.ui.xmlfragment("do.late.change.ZF_DO_LATE_CHG.fragment.AdditionalDetails", this);
+				this._oQuickView.setPlacement(sap.m.PlacementType.Top);
+			}
+
+			this.getView().addDependent(this._oQuickView);
+		},
+
+		_openQuickView: function (oEvent, oModel) {
+			this._createPopover();
+
+			// this._oQuickView.close();
+			this._oQuickView.setModel(oModel);
+
+			// delay because addDependent will do a async rerendering and the actionSheet will immediately close without it.
+			var oButton = oEvent;
+			jQuery.sap.delayedCall(0, this, function () {
+				this._oQuickView.openBy(oButton);
 			});
 		},
 

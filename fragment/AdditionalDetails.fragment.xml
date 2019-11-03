@@ -1,39 +1,25 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:f="sap.ui.layout.form">
-	<Panel width="auto" class=" sapUiResponsiveMargin" accessibleRole="Region">
-		<headerToolbar>
-			<OverflowToolbar height="3rem">
-				<Title text="CURRENT SALESMAN"/>
-			</OverflowToolbar>
-		</headerToolbar>
-		<content>
-			<f:SimpleForm id="formHeader" editable="true" layout="ResponsiveGridLayout" labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12"
-				adjustLabelSpan="false" emptySpanXL="12" emptySpanL="12" emptySpanM="12" emptySpanS="0" columnsXL="12" columnsL="12" columnsM="12"
-				singleContainerFullSize="false">
-				<f:content>
-					<Label text="{i18n>tourID}"/>
-					<Text id="tourid" text="test 123"/>
-					<Label text="{i18n>branch}"/>
-					<Text id="branch" text="test asdkjf ajsdkfj ksdjfkj"/>
-					<!--<Label text="{i18n>route}"/>-->
-					<!--<Text id="routeuser" text="{ROUTE_USER}"/>-->
-					<!--<Label text="{i18n>actualsalesman}"/>-->
-					<!--<Text id="or_sales_man" text="{OR_SALES_MAN}"/>-->
-					<!--<Label text="{i18n>salemanname}"/>-->
-					<!--<Text text="{OR_SALES_NM}"/>-->
-					<!--<Label text="{i18n>actualvehicle}"/>-->
-					<!--<Text id="or_vehicle" text="{OR_VEHICLE}"/>-->
-					<!--<core:Title text=""/>-->
-					<!--<Label text="{i18n>visitlisID}"/>-->
-					<!--<Text id="visitid" text="{VISIT_ID}"/>-->
-					<!--<Label text="{i18n>visitDate}"/>-->
-					<!--<Text text="{path: 'VISIT_DATE', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', source: { pattern: 'yyyyMMdd' } }}"/>-->
-					<!--<Label text="{i18n>actualdriver}"/>-->
-					<!--<Text id="or_driver" text="{OR_DRIVER}"/>-->
-					<!--<Label text="{i18n>drivername}"/>-->
-					<!--<Text text="{OR_DRIVER_NM}"/>-->
-				</f:content>
-			</f:SimpleForm>
-		</content>
-	</Panel>
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<QuickView id="AdditionalDetails" pages="{ path : '/pages', templateShareable : true}" navigate=".onNavigate">
+		<QuickViewPage
+				pageId="{pageId}"
+				header="{header}"
+				icon="{icon}"
+				title="{title}"
+				titleUrl="{titleUrl}"
+				description="{description}"
+				groups="{ path : 'groups', templateShareable : true}">
+			<QuickViewGroup heading="{heading}" elements="{ path : 'elements', templateShareable : true}">
+				<QuickViewGroupElement
+						label="{label}"
+						value="{value}"
+						url="{url}"
+						type="{elementType}"
+						pageLinkId="{pageLinkId}"
+						emailSubject="{emailSubject}"
+						target="{target}"
+						>
+				</QuickViewGroupElement>
+			</QuickViewGroup>
+		</QuickViewPage>
+	</QuickView>
 </core:FragmentDefinition>

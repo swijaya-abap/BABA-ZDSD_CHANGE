@@ -82,6 +82,10 @@ sap.ui.define([
 		 * @private
 		 */
 		_showObject: function(oItem) {
+			var sDetail = {
+				"VISIT_DATE": oItem.getBindingContext("worklistView").getProperty("VISIT_DATE")
+			};
+			this.getOwnerComponent().setModel(sDetail, "Detail");
 			this.getRouter().navTo("object", {
 				visit_cat: oItem.getBindingContext("worklistView").getProperty("VISIT_CAT"),
 				visitdate: oItem.getBindingContext("worklistView").getProperty("VISIT_DATE"),

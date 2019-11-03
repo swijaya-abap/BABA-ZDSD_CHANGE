@@ -32,7 +32,7 @@
 							<Label text="{i18n>visitDate}"/>
 							<Text text="{path: 'VISIT_DATE', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy', source: { pattern: 'yyyyMMdd' } }}"/>
 							<Label text="{i18n>actualdriver}"/>
-							<Text  id="or_driver" text="{OR_DRIVER}"/>
+							<Text id="or_driver" text="{OR_DRIVER}"/>
 							<Label text="{i18n>drivername}"/>
 							<Text text="{OR_DRIVER_NM}"/>
 						</f:content>
@@ -71,15 +71,14 @@
 							<Label text="{i18n>newvihicle}"/>
 							<!--<Input value="" editable="{= ${EDITABLE} === 'X' ? true : false }"/>-->
 							<Input id="newvihicle" required="false" showValueHelp="true" suggestionItems="{/VEHICLESet}" showSuggestion="true" value="{VEHICLE}"
-								suggest="onVhSuggestStart" editable="{= ${EDITABLE} === 'X' ? true : false }" suggestionItemSelected="onVehicleSelected"
-								valueHelpRequest="onHandleVehicleHelp">
+								suggest="onVhSuggestStart" editable="" suggestionItemSelected="onVehicleSelected" valueHelpRequest="onHandleVehicleHelp">
 								<suggestionItems>
 									<core:Item text="{EQUNR}-{EQKTX}"/>
 								</suggestionItems>
 							</Input>
 							<Label text="{i18n>vehiclevaliduntil}"/>
-							<DatePicker id="vehiclevaliduntil" placeholder="Input date ..." displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd"
-								editable="{= ${EDITABLE} === 'X' ? true : false }" dateValue="{VEHICLE_ENDDT}" change="onVehicleChange"/>
+							<DatePicker id="vehiclevaliduntil" placeholder="Input date ..." displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd" editable=""
+								dateValue="{VEHICLE_ENDDT}" change="onVehicleChange"/>
 							<core:Title text=""/>
 							<Label text="{i18n>newdriver}"/>
 							<Input id="newdriver" value="{DRIVER}" editable="{= ${EDITABLE} === 'X' ? true : false }" showValueHelp="true" suggest="onDrSuggestStart"
@@ -99,8 +98,7 @@
 							<DatePicker id="validuntildriver" placeholder="Input date ..." displayFormat="dd.MM.yyyy" valueFormat="yyyyMMdd" dateValue="{DRIVER_ENDDT}"
 								editable="{= ${EDITABLE} === 'X' ? true : false }" change="onDriverChange"/>
 							<Label text="{i18n>visitcat}"/>
-							<ComboBox id="visitcat" showSecondaryValues="true" items="{/VISITCATSet}" selectedKey="{VISIT_CAT}"
-								editable="false">
+							<ComboBox id="visitcat" showSecondaryValues="true" items="{/VISITCATSet}" selectedKey="{VISIT_CAT}" editable="false">
 								<core:ListItem key="{VISIT_CAT}" text="{DESCRIPTION}"/>
 							</ComboBox>
 						</f:content>
@@ -109,8 +107,8 @@
 			</Panel>
 		</semantic:content>
 		<semantic:customFooterContent>
-			<Button text="{i18n>Save}" type="Accept" press="onSavePress" enabled="{= ${EDITABLE} === 'X' ? true : false }"/>
 			<Button text="{i18n>Detail}" type="Default" press="onDetailPress" enabled="true"/>
+			<Button text="{i18n>Save}" type="Accept" press="onSavePress" enabled="{= ${EDITABLE} === 'X' ? true : false }"/>
 		</semantic:customFooterContent>
 	</semantic:FullscreenPage>
 </mvc:View>
